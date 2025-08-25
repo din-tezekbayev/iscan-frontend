@@ -12,11 +12,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-    volumes:
-      # Remove volumes for production, but keep for development if needed
-      - ./iscan-frontend:/app
-      - /app/node_modules
-      - /app/.next
+    # No volumes for production - everything is built into the image
     restart: unless-stopped
     networks:
       - iscan_network
