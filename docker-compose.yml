@@ -1,23 +1,18 @@
-version: '3.8'
-
 services:
   frontend:
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
+    container_name: iscan_frontend
     ports:
       - "3000:3000"
-    env_file:
-      - .env
     environment:
       - NODE_ENV=production
-      - PORT=3000
-    # No volumes for production - everything is built into the image
+      - NEXT_PUBLIC_API_URL=https://scan-api.ristart.kz
     restart: unless-stopped
     networks:
-      - iscan_network
+      - frontend_network
 
 networks:
-  iscan_network:
-    name: iscan_shared_network
-    external: true
+  frontend_network:
+    driver: bridge
